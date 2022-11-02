@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>not</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+        charset="urf-8">
+    <style>
+        .content-container {
+            word-break: break-all;
+            font-size: 14px;
+            color: var(--text);
+            line-height: 24px;
+        }
+
+        .content-container p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-container">{{@ content}}</div>
+</body>
+
+</html>
+
+<script>
+
+    function readNoteByNote(linkNoteId) {
+        if (!isAccess) {
+            tipsElem.classList.toggle('tips-active')
+
+            return
+        }
+
+        location.assign(`/mobile/link/${linkNoteId}/${firstNoteId}`)
+    }
+
+    const linkText = document.querySelectorAll('span[style*=font-family], a[style*=font-family]')
+    const firstNoteId = '{{ firstNoteId }}'
+    const isAccess = '{{ isAccess }}' === 'true'
+    const tipsElem = document.querySelector('.container .tips')
+
+    for (let i of linkText) {
+        const linkNoteId = i.style.fontFamily.split('-')[1]
+
+        i.addEventListener('click', () => {
+            readNoteByNote(linkNoteId)
+        })
+    }
+
+    tipsElem.addEventListener('animationend', () => { tipsElem.classList.toggle('tips-active') })
+    tipsElem.addEventListener('webkitAnimationEnd', () => { tipsElem.classList.toggle('tips-active') })
+
+</script>

@@ -1,0 +1,64 @@
+.map-container {
+    width: 100%;
+    color: var(--title);
+}
+
+.map-container .title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.map-container .main-body {
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.map-container .main-body::-webkit-scrollbar {
+    display: none;
+}
+
+.control-floor {
+    display: flex;
+}
+
+.control-floor .floor {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.control-floor .floor .floorItem {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    left: 0;
+}
+
+.control-floor .floor .floorItem .text {
+    width: 100px;
+    height: 30px;
+    background-color: var(--map-background);
+    color: var(--title);
+    border-radius: 4px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.control-floor .floor .floorItem .link {
+    color: var(--link-color);
+}
+
+.control-floor .floor .line {
+    position: absolute;
+    width: 50px;
+    z-index: 0;
+}

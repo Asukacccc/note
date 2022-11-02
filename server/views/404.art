@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" charset="urf-8">
+        <title>404 qaq</title>
+        <link rel="stylesheet" href="../style/base.css">
+        <style>
+            .text-top {
+                font-size: 40px;
+                color: var(--title);
+                margin: 35vh auto 0;
+                text-align: center;
+            }
+
+            .text-bottom{
+                color: var(--title);
+                bottom: -20px;
+                font-size: 14px;
+                margin-top: 20px;
+                width: 100%;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="text-top">404</div>
+        <div class="text-bottom">{{ isTimeout ? '链接过期失效' : '页面不存在' }}</div>
+    </body>
+</html>

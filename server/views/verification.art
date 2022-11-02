@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+        charset="urf-8">
+    <title>验证</title>
+    <link rel="stylesheet" href="/base.css">
+    <script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
+    <style>
+        .main-body {
+            margin: 10% auto 0;
+            width: 300px;
+        }
+
+        .main-body .logo-icon {
+            margin-bottom: 50px;
+            display: block;
+            height: 45px;
+            width: 90px;
+        }
+
+        .main-body .title {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .main-body .verification-input {
+            width: 100%;
+            border-radius: 4px;
+            border: none;
+            padding: 0;
+            margin-top: 10px;
+            outline: none;
+            height: 36px;
+            background-color: var(--shallow);
+            color: var(--title);
+            padding-left: 10px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .main-body .submit {
+            margin-top: 20px;
+            float: right;
+            width: 70px;
+            font-weight: bold;
+            height: 28px;
+            line-height: 28px;
+            font-size: 14px;
+            border-radius: 4px;
+            text-align: center;
+            background-color: var(--condition-background);
+            color: var(--condition-text);
+        }
+
+        .main-body .title .highlight {
+            animation: input-invalid 2s 1;
+            -moz-animation: input-invalid 2s 1;
+            -webkit-animation: input-invalid 2s 1;
+            -o-animation: input-invalid 2s 1;
+        }
+
+        @keyframes input-invalid {
+            0% {
+                color: var(--text);
+                font-weight: normal;
+            }
+
+            50% {
+                color: red;
+                font-weight: bold;
+            }
+
+            100% {
+                color: var(--text);
+                font-weight: normal;
+            }
+        }
+
+        @-moz-keyframes input-invalid {
+            0% {
+                color: var(--text);
+                font-weight: normal;
+            }
+
+            50% {
+                color: red;
+                font-weight: bold;
+            }
+
+            100% {
+                color: var(--text);
+                font-weight: normal;
+            }
+        }
+
+        @-webkit-keyframes input-invalid {
+            0% {
+                color: var(--text);
+                font-weight: normal;
+            }
+
+            50% {
+                color: red;
+                font-weight: bold;
+            }
+
+            100% {
+                color: var(--text);
+                font-weight: normal;
+            }
+        }
+
+        @-o-keyframes input-invalid {
+            0% {
+                color: var(--text);
+                font-weight: normal;
+            }
+
+            50% {
+                color: red;
+                font-weight: bold;
+            }
+
+            100% {
+                color: var(--text);
+                font-weight: normal;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-body">
+        <img src="/logo.png" alt="logo" class="logo-icon">
+        <div class="title"><span>请输入笔记验证码</span>&nbsp;&nbsp;<span>&lt;4位&gt;</span></div>
+        <input type="text" maxlength="4" placeholder="在此输入" class="verification-input" />
+        <div class="submit">确认</div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    function shiftElementClass() {
+        lengthTip.classList.toggle('highlight')
+    }
+
+    async function checkVerification(value) {
+        const { data } = await fly.post('/mobile/check', { verification: value, noteId })
+
+        if (data.status) {
+            if (data.message === false) return location.replace('/not')
+            if (data.message === 'verification error') {
+                invalidTip.innerText = '验证错误, 请重新输入'
+                input.value = ''
+            }
+        } else {
+            location.replace(`/mobile/content/${noteId}`)
+        }
+    }
+
+    function clickButton() {
+        const value = input.value.trim()
+
+        if (value.length !== 4) {
+            shiftElementClass()
+        } else {
+            checkVerification(value)
+        }
+    }
+
+    const titleElement = document.querySelectorAll('div.title span')
+    const invalidTip = titleElement[0]
+    const lengthTip = titleElement[1]
+    const input = document.querySelector('input[type=text]')
+    const button = document.querySelector('.submit')
+    const noteId = '{{ noteId }}' || location.href.match(/\d+$/)[0]
+    const isBackToFirst = '{{ isBackToFirst }}'
+
+    lengthTip.addEventListener('animationend', shiftElementClass)
+    lengthTip.addEventListener('webkitAnimationEnd', shiftElementClass)
+    button.addEventListener('click', clickButton)
+
+    if ('{{ noteId }}') {
+        if ('{{ isBackToFirst }}' === 'true') {
+            invalidTip.innerText = '请输入第一篇笔记的验证码'
+        }
+    }
+
+</script>

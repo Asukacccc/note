@@ -1,0 +1,173 @@
+body {
+    background-color: var(--background-color);
+}
+
+.container {
+    width: calc(100vw - 30p);
+    margin: 30px auto 0;
+}
+
+.container .tips {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px 14px;
+    background-color: var(--condition-background);
+    color: var(--condition-text);
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 4px;
+    height: 24px;
+    line-height: 24px;
+    box-shadow: 1px 1px 3px 1px var(--map-background);
+    top: -28px;
+}
+
+.container .tips-active {
+    animation: tips-animation 2.5s ease-out 1;
+    -moz-animation: tips-animation 2.5s ease-out 1;
+    -webkit-animation: tips-animation 2.5s ease-out 1;
+    -o-animation: tips-animation 2.5s ease-out 1;
+}
+
+@keyframes tips-animation {
+    0% {
+        top: -28px;
+    }
+
+    15% {
+        top: 50px;
+    }
+
+    80% {
+        top: 50px;
+    }
+
+    100% {
+        top: -28px;
+    }
+}
+
+@-moz-keyframes tips-animation {
+    0% {
+        top: -28px;
+    }
+
+    15% {
+        top: 50px;
+    }
+
+    80% {
+        top: 50px;
+    }
+
+    100% {
+        top: -28px;
+    }
+}
+
+@-webkit-keyframes tips-animation {
+    0% {
+        top: -28px;
+    }
+
+    15% {
+        top: 50px;
+    }
+
+    80% {
+        top: 50px;
+    }
+
+    100% {
+        top: -28px;
+    }
+}
+
+@-o-keyframes tips-animation {
+    0% {
+        top: -28px;
+    }
+
+    15% {
+        top: 50px;
+    }
+
+    80% {
+        top: 50px;
+    }
+
+    100% {
+        top: -28px;
+    }
+}
+
+.container .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .header .logo-icon {
+    display: block;
+    width: 80px;
+    height: 40px;
+}
+
+.container .header .user {
+    width: calc(100% - 80px);
+    display: flex;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.container .header .user ::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 70%;
+    height: 1px;
+    transform: scaleY(0.3);
+    background-color: var(--text);
+}
+
+.container .info {
+    flex: 1;
+    width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container .info .name {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.container .info .name {
+    font-weight: bold;
+    color: var(--title);
+    font-size: 14px;
+}
+
+.container .info .signature {
+    color: var(--text);
+    font-size: 12px;
+    width: 100%;
+}
+
+.container .header .user .avatar {
+    margin-right: 10px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.container .tail {
+    margin-top: 50px;
+    font-size: 12px;
+    color: var(--text);
+}

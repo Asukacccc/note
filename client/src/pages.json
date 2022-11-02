@@ -1,0 +1,54 @@
+{
+    "pages": [
+        {
+            "path": "pages/index/index"
+        }
+    ],
+    "subPackages": [
+        {
+            "root": "sub-package/write",
+            "pages": [
+                {
+                    "path": "text-note/text-note"
+                },
+                {
+                    "path": "map-note/map-note"
+                },
+                {
+                    "path": "share/share"
+                }
+            ]
+        },
+        {
+            "root": "sub-package/search",
+            "pages": [
+                {
+                    "path": "search/search"
+                },
+                {
+                    "path": "condition/condition"
+                }
+            ]   
+        },
+        {
+            "root": "sub-package/user-info",
+            "pages": [
+                {
+                    "path": "index/index"
+                },
+                {
+                    "path": "info/info"
+                },
+                {
+                    "path": "share/share"
+                }
+            ]
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "@navigationBarTextStyle",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8",
+        "navigationStyle": "custom"
+    }
+}

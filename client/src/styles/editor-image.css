@@ -1,0 +1,8 @@
+.editorImage {
+    display: block;
+    width: calc(100% - 70px);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 35px;
+    margin-right: 35px;
+}

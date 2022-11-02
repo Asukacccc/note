@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/map-note.css">
+</head>
+
+<body>
+    <div class="map-container">
+        <div class="title"></div>
+        <div class="title-line"></div>
+        <div class="main-body">
+            <div class="control-floor">
+                <div class="floor">
+                    {{each content[1] v i}}
+                    {{each v.list v2 i2}}
+                    <div class="floorItem" style="top: {{ content[2][v2.childId].top }}px; left: {{i * 150}}px">
+                        <div class="text{{ content[2][v2.childId].isLink ? ' link' : '' }}" onclick="clickItem({{ content[2][v2.childId].isLink }})">
+                            {{content[2][v2.childId].name}}</div>
+                    </div>
+                    {{if i > 0}}<div class="line" style="{{@ style[v2.childId]}}"></div>{{/if}}
+                    {{/each}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function clickItem(linkId) {
+        if (!isAccess) {
+            tipsElem.classList.toggle('tips-active')
+
+            return
+        }
+
+        if (typeof linkId === 'number') {
+            location.assign(`/mobile/link/${linkId}/${firstNoteId}`)
+        }
+    }
+
+    function computedWidth() {
+        return Reflect.ownKeys(floorList).length * 150
+    }
+
+    function computedChildCount(num = 0, count = 0) {
+        const result = Reflect.has(parentChildRelation, num)
+
+        if (result) {
+            for (let i of parentChildRelation[num]) {
+                count += computedChildCount(i)
+            }
+
+            return count
+        } else {
+            return ++count
+        }
+    }
+
+    const [parentChildRelation, floorList] = JSON.parse('{{ content }}'.replaceAll('&#34;', '"'))
+    const controlFloor = document.querySelector('.map-container .main-body .control-floor')
+    const titleElement = document.querySelector('.map-container .title')
+    const firstNoteId = '{{ firstNoteId }}'
+    const isAccess = '{{ isAccess }}' === 'true'
+    const tipsElem = document.querySelector('.container .tips')
+
+    controlFloor.style.height = `${ computedChildCount() * 50 }px`
+    controlFloor.style.width = `${ computedWidth() + 50 }px`
+    titleElement.innerText = '{{ title }}'
+    tipsElem.addEventListener('animationend', () => { tipsElem.classList.toggle('tips-active') })
+    tipsElem.addEventListener('webkitAnimationEnd', () => { tipsElem.classList.toggle('tips-active') })
+</script>

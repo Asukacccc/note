@@ -1,0 +1,27 @@
+:root {
+    --title: #171717;
+    --text: #707077;
+    --background-color: #fdfdfd;
+    --link: #00bbf0;
+    --shallow: #F1F1F1;
+    --condition-text: #165E9A;
+    --condition-background: #85BBF2;
+    --map-background: rgba(112, 112, 112, .2);
+    --link-color: #00bbf0;
+
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --title: #B2B2B2;
+        --text: #9A9A9A;
+        --background-color: #343434;
+        --shallow: #444444;
+        --map-background: rgba(195, 183, 183, .2);
+
+        background-color: var(--background-color);
+    }
+}

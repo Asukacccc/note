@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>笔记内容</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+        charset="urf-8">
+    <link rel="stylesheet" href="/base.css">
+    <link rel="stylesheet" href="/content.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tips">不可通过链接访问</div>
+        <div class="header">
+            <div class="user">
+                <img src="/image/avatar/{{ avatar }}" alt="" class="avatar">
+                <div class="info">
+                    <div class="name">{{ name }}</div>
+                    <div class="signature">{{ signature }}</div>
+                </div>
+            </div>
+            <img src="/logo.png" alt="logo" class="logo-icon">
+        </div>
+        <div class="content">
+            {{if isTextNote}} {{include './text-note.art'}}
+            {{else}} {{include './map-note.art'}}
+            {{/if}}
+        </div>
+        <div class="tail"></div>
+    </div>
+</body>
+
+</html>
+
+<script src="/conversion.js"></script>
+<script>
+
+    const tailElem = document.querySelector('.container .tail')
+
+    tailElem.innerHTML = (function () {
+        const infoArray = timeFormatHandler('{{ updateTime }}')
+        return `--修改于 ${infoArray[0]}  - <b>${infoArray[1]}</b>`
+    })()
+
+</script>
